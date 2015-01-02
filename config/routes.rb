@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  # Landing page
+  root 'welcome#index'
+
+  # Admin pages
+  # Admin roles are to
+  get 'admin/users' => 'admin#users'
+  get 'admin/files' => 'admin#files'
+
+  resources :streams
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
