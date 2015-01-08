@@ -37,7 +37,19 @@ gem 'spring',        group: :development
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano', '~> 3.2.1'
+gem 'capistrano-bundler', '~> 1.1.3'
+gem 'capistrano-rails', '~> 1.1.2'
+gem 'capistrano-rvm', '~> 0.1.1'
+
+# Authentication
+gem 'devise', '~> 3.3.0'
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-facebook', '~> 2.0.0'
+gem 'omniauth-google-oauth2', '~> 0.2.5'
+
+# Hide passwords from terminal when using capistrano
+gem 'highline', '~> 1.6.21'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
