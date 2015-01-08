@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150108031825) do
 
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "image"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "provider"
-    t.string   "uid"
-  end
-  
   create_table "streams", force: true do |t|
     t.string   "title"
     t.string   "category"
@@ -32,6 +22,16 @@ ActiveRecord::Schema.define(version: 20150108031825) do
     t.string   "rottenTomatoesLink"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "image"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end

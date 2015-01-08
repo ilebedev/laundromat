@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   config.to_prepare do
     Devise::SessionsController.skip_before_filter :authenticate_user!
   end
-  before_filter :authenticate_user!
+  # TODO: add the following to require auth
+  #before_filter :authenticate_user!
 
   #TODO: do we need this?
   def new_session_path(scope)
