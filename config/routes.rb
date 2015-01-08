@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'stream/index'
+
+  # Landing page
   root 'public#root'
 
   # Authentication things

@@ -54,3 +54,4 @@ gem 'highline', '~> 1.6.21'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
