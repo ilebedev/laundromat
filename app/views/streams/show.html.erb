@@ -1,0 +1,19 @@
+<div class="container col-xs-12 text-left">
+	<p>
+	  <strong>Title:</strong>
+	  <%= @stream.title %>
+	</p>
+
+	<p>
+	  <strong>Category:</strong>
+	  <%= @stream.category %>
+	</p>
+	 
+	<p>
+	  <strong>Description:</strong>
+	  <%= @stream.description %>
+	</p>
+
+	<%= link_to 'Back', streams_path %> |
+	<%= link_to 'Edit', edit_stream_path(@stream) %>
+</div>

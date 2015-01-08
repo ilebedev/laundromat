@@ -1,0 +1,23 @@
+<div class="container col-xs-12 text-center">
+	<h1>Watch</h1>
+	<table>
+	  <tr>
+		<th>Title</th>
+		<th>Category</th>
+		<th>Description</th>
+	  </tr>
+	 
+	  <% @streams.each do |s| %>
+		<tr>
+		  <td><%= link_to s.title, s %></td>
+		  <td><%= s.category %></td>
+		  <td><%= s.description %></td>
+		  <td><%= link_to 'Edit', edit_stream_path(s) %></td>
+		  <td><%= link_to 'Delete', stream_path(s),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+		</tr>
+	  <% end %>
+	</table>
+	<%= link_to "Add a Stream", new_stream_path %>
+</div>
