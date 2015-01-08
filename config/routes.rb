@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  # Landing page
-  root 'welcome#index'
+  root 'public#root'
 
-  # Admin pages
-  # Admin roles are to
-  get 'admin/users' => 'admin#users'
-  get 'admin/files' => 'admin#files'
+  # Authentication things
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  #devise_scope :user do
+  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  #end
 
   resources :streams
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

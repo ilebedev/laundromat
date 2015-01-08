@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'f643210df4dbc86f4ea5991cce9c5da2e5da0c82f9f6141bcc6cfd2253a739ebbca3df8c3c56bf6ebea83420987b97cfd2d3229de8e09f1e672baa79648e66c2'
+  # config.secret_key = '(key)'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -233,6 +233,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+
+  config.omniauth :facebook, Rails.application.secrets.facebook_token, Rails.application.secrets.facebook_key
+  config.omniauth :google_oauth2, Rails.application.secrets.google_token, Rails.application.secrets.google_key
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
