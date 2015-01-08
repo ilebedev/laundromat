@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stream/index'
+
   # Landing page
   root 'welcome#index'
 
