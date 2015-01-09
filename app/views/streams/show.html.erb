@@ -1,19 +1,27 @@
-<div class="container col-xs-12 text-left">
-	<p>
-	  <strong>Title:</strong>
-	  <%= @stream.title %>
-	</p>
+<head>
+	<link href="//vjs.zencdn.net/4.11/video-js.css" rel="stylesheet">
+	<script src="//vjs.zencdn.net/4.11/video.js"></script>
+</head>
+<body>
+	<div class="container col-xs-12 text-left">
+		<%= video_tag("small.mp4", controls: true, id: "videoStream", class: "video-js vjs-default-skin", preload: "auto") %>
+		
+		<p>
+		  <strong>Title:</strong>
+		  <%= @stream.title %>
+		</p>
 
-	<p>
-	  <strong>Category:</strong>
-	  <%= @stream.category %>
-	</p>
-	 
-	<p>
-	  <strong>Description:</strong>
-	  <%= @stream.description %>
-	</p>
+		<p>
+		  <strong>Category:</strong>
+		  <%= @stream.category %>
+		</p>
+		 
+		<p>
+		  <strong>Description:</strong>
+		  <%= @stream.description %>
+		</p>
 
-	<%= link_to 'Back', streams_path %> |
-	<%= link_to 'Edit', edit_stream_path(@stream) %>
-</div>
+		<%= link_to 'Back', streams_path %> |
+		<%= link_to 'Edit', edit_stream_path(@stream) %>
+	</div>
+</body>
