@@ -51,7 +51,7 @@ gem 'omniauth-google-oauth2', '~> 0.2.5'
 # Hide passwords from terminal when using capistrano
 gem 'highline', '~> 1.6.21'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+# Use the byebug debugger
+gem 'byebug', group: [:development, :test]
 
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]

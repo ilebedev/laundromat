@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'stream/index'
-
   # Landing page
   root 'public#root'
 
   # Authentication things
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
-  #devise_scope :user do
-  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-  #end
+  devise_scope :user do
+    delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+
+    if Rails.env.development?
+      match 'development_auth', to: "omniauth_callbacks#development_auth", via: [:get, :post], as: "development_auth"
+    end
+  end
 
   resources :streams
   resources :users

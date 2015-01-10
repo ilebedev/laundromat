@@ -8,40 +8,67 @@
 </head>
 <body>
 
-<% if user_signed_in? %>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
+      <% if user_signed_in? %>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <% end %>
       <a class="navbar-brand" href="/">
-        Welcome to the laundromat, <%= current_user.first_name %>
+        the laundromat
       </a>
     </div>
+    <% if user_signed_in? %>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><%= link_to 'Watch', controller: 'streams' %></li>
+        <li><%= link_to 'Watch', controller: 'streams' %></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
+          <a href="#" class="dropdown_toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <%= image_tag current_user.image, class: "profile_picture" %>
+            <%= current_user.first_name %>
+            <span class="caret">
+          </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Users</a></li>
-            <li><a href="#">Streams</a></li>
-            <li><a href="#">Activity</a></li>
+            <li><%= link_to "Profile", user_path(current_user) %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
           </ul>
-        </li>
-        <li>
-          <%= link_to "Sign out", destroy_user_session_path %>
         </li>
       </ul>
     </div>
+    <% end %>
   </div>
 </nav>
+
+<div class="container">
+
+<% if notice %>
+<div class="alert alert-info alert-dismissable" role="alert">
+  <button type="button" class="close" data-dismiss="alert">
+    <span aria-hidden="true">&times;</span>
+    <span class="sr-only">Close</span>
+  </button>
+  <%= notice %>
+</div>
 <% end %>
 
-<%= yield %>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= alert %>
+  </div>
+<% end %>
 
+<main class="container">
+  <%= yield %>
+</main>
+
+</div>
 </body>
 </html>

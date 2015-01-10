@@ -9,5 +9,13 @@
   <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
   <br>
   <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+  <br>
+  <% if Rails.env.development? %>
+    <%= link_to "Sign in as Allie the Admin (dev only)",
+                development_auth_path(provider: "development",
+                                      uid: "1",
+                                      first_name: "Allie",
+                                      image: "http://www.alleycat.org/view.image?Id=4112",
+                                      email: "none@none.com")%>
+  <% end %>
 <% end %>
-</p>
