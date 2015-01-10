@@ -30,3 +30,6 @@ config/secrets.yml
 /vendor/assets/bower_components
 *.bowerrc
 bower.json
+
+# We would do well to ignore videos!
+/app/assets/videos/*.mp4
