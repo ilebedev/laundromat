@@ -17,5 +17,20 @@
                                       first_name: "Allie",
                                       image: "http://www.alleycat.org/view.image?Id=4112",
                                       email: "none@none.com")%>
+    <br>
+    <%= link_to "Sign in as Ursula the User (dev only)",
+                development_auth_path(provider: "development",
+                                      uid: "2",
+                                      first_name: "Ursula",
+                                      image: "http://www.supercoolpets.com/pictures/scratchntv.jpg",
+                                      email: "none@none.com")%>
+    <br>
+    <%= link_to "Sign in as Garry the Guest (dev only)",
+                development_auth_path(provider: "development",
+                                      uid: "3",
+                                      first_name: "Garry",
+                                      image: "http://media2.popsugar-assets.com/files/2013/11/07/163/n/1922243/90ff6fee7548fa01_thumb_temp323269331383342390.xxxlarge/i/Silly-Cat-GIFs.jpg",
+                                      email: "none@none.com")%>
+
   <% end %>
 <% end %>
