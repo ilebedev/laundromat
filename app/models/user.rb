@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
   devise :omniauthable,
          :omniauth_providers => [ :facebook,
                                   :google_oauth2 ]
+								  
+  # Roles for authorization (defaults to lowest privilege)
+  enum role: [:user, :admin, :guest]
+  after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role ||= :guest
+  end
 
   def self.from_omniauth(auth)
     # todo - update email maybe?

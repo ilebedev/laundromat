@@ -19,7 +19,7 @@ class StreamsController < ApplicationController
 	@stream = Stream.new(stream_params)
 	 
 	if @stream.save
-	  redirect_to @stream
+	  redirect_to streams_path
     else
 	  render 'new'
     end	

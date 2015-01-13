@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108031825) do
+ActiveRecord::Schema.define(version: 20150113040519) do
 
   create_table "streams", force: true do |t|
     t.string   "title"
-    t.string   "category"
     t.text     "description"
     t.string   "imdbLink"
     t.string   "wikipediaLink"
     t.string   "rottenTomatoesLink"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category"
   end
 
   create_table "users", force: true do |t|
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150108031825) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
+    t.integer  "role"
   end
 
 end
