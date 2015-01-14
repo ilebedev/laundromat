@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
                       ' the ' +
                       current_user.role +
                       '.'
+      redirect_to root_url
       return false
     end
     return true

@@ -5,34 +5,23 @@ class UsersController < ApplicationController
 
   def authenticate_and_authorize_for_user
     @user = User.find params[:id]
-    unless authenticate_and_authorize_at_least_guest
-      return false
-    end
-    authorized_for? @user
+    authenticate_and_authorize_at_least_guest and authorize_for @user
   end
 
   def index
-    unless user_is_at_least_admin?
-      redirect_to root_path
-    end
-
     @users = User.all
   end
 
   def edit
-    unless authorized_for? @user
-      redirect_to root_path
-    end
+    # @user is initialized by the before_filter
   end
 
   def show
-    unless authorized_for? @user
-      redirect_to root_path
-    end
+    # @user is initialized by the before_filter
   end
 
   def update
-    if (user_is_at_least_admin? or authorized_for? @user) and @user.update(user_params)
+    if @user.update(user_params)
       redirect_to @user
     else
       render 'edit'
@@ -40,11 +29,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if authorized_for? @user
-      @user.destroy
-    end
-
-    redirect_to root_path
+    @user.destroy
   end
 
   private
