@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
       if not roles.map{ |i| i.to_s }.include? current_user.role
         flash[:alert] = 'Action available to ' +
                         roles.to_sentence +
-                        ' roles , but you are merely a ' +
+                        ' roles, but you are merely a ' +
                         current_user.role +
                         '.'
         redirect_to root_url
