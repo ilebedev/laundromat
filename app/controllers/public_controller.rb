@@ -1,8 +1,8 @@
 class PublicController < ApplicationController
-  skip_before_filter :authenticate_and_authorize_user, only: [:root]
+  # NOTE: public action (root), no authorization
 
   def root
-    if user_signed_in?
+    if user_signed_in? and user_is_at_least_user?
       redirect_to streams_path
     end
   end

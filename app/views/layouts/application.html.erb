@@ -43,19 +43,19 @@
   </div>
 </nav>
 
-<div class="container">
+<main class="container">
 
-<% if notice %>
-<div class="alert alert-info alert-dismissable" role="alert">
-  <button type="button" class="close" data-dismiss="alert">
-    <span aria-hidden="true">&times;</span>
-    <span class="sr-only">Close</span>
-  </button>
-  <%= notice %>
-</div>
-<% end %>
+  <% if notice %>
+  <div class="alert alert-info alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= notice %>
+  </div>
+  <% end %>
 
-<% if alert %>
+  <% if alert %>
   <div class="alert alert-danger alert-dismissable" role="alert">
     <button type="button" class="close" data-dismiss="alert">
       <span aria-hidden="true">&times;</span>
@@ -65,10 +65,8 @@
   </div>
 <% end %>
 
-<main class="container">
-  <%= yield %>
+<%= yield %>
 </main>
 
-</div>
 </body>
 </html>

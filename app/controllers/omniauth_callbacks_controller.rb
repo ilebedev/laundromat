@@ -1,5 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_before_filter :authenticate_and_authorize_user
+  # NOTE: Public actions, no authorization
+  # NOTE: development-only actions to log in via links
   before_filter :restrict_to_development, only: [:development_auth, :development_user_params]
 
   def self.provides_callback_for(provider)
@@ -24,7 +25,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   protected
     def development_user_params
-      params.permit(:provider, :uid, :first_name, :image, :email)
+      params.permit(:provider, :uid, :first_name, :image, :role, :email)
     end
 
     def handle_sign_in(user, provider)

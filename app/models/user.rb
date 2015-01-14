@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   devise :omniauthable,
          :omniauth_providers => [ :facebook,
                                   :google_oauth2 ]
-								  
-  # Roles for authorization (defaults to lowest privilege)
-  enum role: [:user, :admin, :guest]
-  after_initialize :set_default_role, if: :new_record?
 
+  # Roles for authorization (defaults to lowest privilege)
+  ROLES = [:guest, :user, :admin] # NOTE: order matters! Enum value grows left to right.
+  enum role: ROLES
+  after_initialize :set_default_role, if: :new_record?
   def set_default_role
     self.role ||= :guest
   end
@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
         user.first_name = params[:first_name]
         user.image = params[:image]
         user.email = params[:email]
+        user.role = params[:role]
       end
     end
   end

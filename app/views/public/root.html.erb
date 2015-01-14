@@ -1,8 +1,10 @@
 
 <p>
 <% if user_signed_in? %>
-  <%= image_tag current_user.image , alt: "user image" %>
-  Hi! Signed in as<%= current_user.first_name %>.
+  <%= image_tag current_user.image,
+                class: "profile_picture",
+                alt: "user profile picture" %>
+  Hi! Signed in as <%= current_user.first_name %> the <%= current_user.role.capitalize %>.
   We think your email is <%= current_user.email %>.
   Did we get that right?
 <% else %>
@@ -16,6 +18,7 @@
                                       uid: "1",
                                       first_name: "Allie",
                                       image: "http://www.alleycat.org/view.image?Id=4112",
+                                      role: "admin",
                                       email: "none@none.com")%>
     <br>
     <%= link_to "Sign in as Ursula the User (dev only)",
@@ -23,6 +26,7 @@
                                       uid: "2",
                                       first_name: "Ursula",
                                       image: "http://www.supercoolpets.com/pictures/scratchntv.jpg",
+                                      role: "user",
                                       email: "none@none.com")%>
     <br>
     <%= link_to "Sign in as Garry the Guest (dev only)",
