@@ -15,12 +15,13 @@ class User < ActiveRecord::Base
   # Roles for authorization (defaults to lowest privilege)
   ROLES = [:guest, :user, :admin] # NOTE: order matters! Enum value grows left to right.
   enum role: ROLES
+
   after_initialize :set_default_role, if: :new_record?
+
   def set_default_role
-    p '--------------------------------'
-    p User.count
-    if User.count_by_sql("select count(*) from users") == 0
-      self.role = :admin
+    # Make the first user admin, otherwise default to guest
+    if User.unscoped.count == 0
+      self.role ||= :admin
     else
       self.role ||= :guest
     end

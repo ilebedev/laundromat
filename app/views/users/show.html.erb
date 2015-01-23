@@ -1,5 +1,5 @@
-<div class="container col-xs-12 text-left">		
-  <%= image_tag @user.image %>
+<div class="container col-xs-12 text-left">
+  <%= image_tag @user.image, class: "profile_picture img_large" %>
   <p>
     <strong>Name:</strong>
     <%= @user.first_name %>
@@ -8,8 +8,8 @@
   <p>
     <strong>Email:</strong>
     <%= @user.email %>
-  </p> 
-  
+  </p>
+
   <p>
     <strong>Role:</strong>
     <%= @user.role.capitalize %>

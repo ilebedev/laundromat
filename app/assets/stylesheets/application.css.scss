@@ -11,8 +11,14 @@
 
 .profile_picture {
   border-radius: 50%;
-  width: 2em;
   height: 2em;
+  width: 2em;
+  overflow: hidden;
+}
+
+.img_large {
+  height: 8em;
+  width: 8em;
 }
 
 .big_icon {
