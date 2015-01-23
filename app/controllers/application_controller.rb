@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
 
   def authorize_for (user)
     unless authorized_for? user
-      flash[:alert] = 'Action available to ' +
-                      user.first_name +
+      flash[:alert] = 'Action available to a specific other user' +
+                      # (this leaks information) user.first_name +
                       ' or an Admin, but you are ' +
                       current_user.first_name +
                       ' the ' +
