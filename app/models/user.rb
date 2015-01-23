@@ -17,7 +17,13 @@ class User < ActiveRecord::Base
   enum role: ROLES
   after_initialize :set_default_role, if: :new_record?
   def set_default_role
-    self.role ||= :guest
+    p '--------------------------------'
+    p User.count
+    if User.count_by_sql("select count(*) from users") == 0
+      self.role = :admin
+    else
+      self.role ||= :guest
+    end
   end
 
   def self.from_omniauth(auth)
