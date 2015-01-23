@@ -1,17 +1,22 @@
 
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// Bootstrap theme here
+
+// Font awesome
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 .profile_picture {
   border-radius: 50%;
   width: 2em;
   height: 2em;
 }
 
-// Override color scheme here
-
-
-
-
-
-// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
+.big_icon {
+  font-size: 3em;
+  display: inline-block;
+  color: gray;
+}

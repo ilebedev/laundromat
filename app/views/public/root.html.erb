@@ -8,33 +8,64 @@
   We think your email is <%= current_user.email %>.
   Did we get that right?
 <% else %>
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-  <br>
-  <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
-  <br>
-  <% if Rails.env.development? %>
-    <%= link_to "Sign in as Allie the Admin (dev only)",
+
+  <div id="sign_in_modal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Who're you?</h1>
+        </div>
+        <div class="modal-body">
+          <p>
+          We don't want your secrets. There are no passwords here. Instead, we use secure <a target="_blank" href="http://oauth.net/">fancypants technology</a> to check if you are are on our VIP list.</p>
+          <p class="text-center">
+            <%= link_to user_omniauth_authorize_path(:google_oauth2), class: "big_icon" do %>
+              <%= icon('google-plus-square') %>
+            <% end %>
+            <%= link_to user_omniauth_authorize_path(:facebook), class: "big_icon" do %>
+              <%= icon('facebook-square') %>
+            <% end %>
+          </p>
+          <% if Rails.env.development? %>
+          <hr>
+          <p class="alert alert-warning" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Oh snap! We're in development mode, which means you can log in using these amazingly sketch additional options:
+            <br>
+            <%= link_to "Sign in as Allie the Admin (dev only)",
                 development_auth_path(provider: "development",
                                       uid: "1",
                                       first_name: "Allie",
                                       image: "http://www.alleycat.org/view.image?Id=4112",
                                       role: "admin",
                                       email: "none@none.com")%>
-    <br>
-    <%= link_to "Sign in as Ursula the User (dev only)",
+            <br>
+            <%= link_to "Sign in as Ursula the User (dev only)",
                 development_auth_path(provider: "development",
                                       uid: "2",
                                       first_name: "Ursula",
                                       image: "http://www.supercoolpets.com/pictures/scratchntv.jpg",
                                       role: "user",
                                       email: "none@none.com")%>
-    <br>
-    <%= link_to "Sign in as Garry the Guest (dev only)",
+            <br>
+            <%= link_to "Sign in as Garry the Guest (dev only)",
                 development_auth_path(provider: "development",
                                       uid: "3",
                                       first_name: "Garry",
                                       image: "http://media2.popsugar-assets.com/files/2013/11/07/163/n/1922243/90ff6fee7548fa01_thumb_temp323269331383342390.xxxlarge/i/Silly-Cat-GIFs.jpg",
                                       email: "none@none.com")%>
+          </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <% end %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#sign_in_modal").modal({
+        backdrop: 'static'
+      });
+    });
+  </script>
 <% end %>
