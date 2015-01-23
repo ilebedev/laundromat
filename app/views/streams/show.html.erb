@@ -17,11 +17,11 @@
 		</p>
 		 
 		<p>
-		  <strong>Description:</strong>
-		  <%= @stream.description %>
+      <strong>Description:</strong>
+      <%= @stream.description %>
 		</p>
 
-		<%= link_to 'Back', streams_path %> |
-		<%= link_to 'Edit', edit_stream_path(@stream) %>
+		<%= link_to 'Back', streams_path %> 
+    <% if user_is_at_least_admin? %> | <%= link_to 'Edit', edit_stream_path(@stream) %><% end %>
 	</div>
 </body>

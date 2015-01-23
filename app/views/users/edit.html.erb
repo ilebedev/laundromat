@@ -1,0 +1,38 @@
+<div class="container col-xs-12 text-left">
+	<h1>Edit a User</h1>
+	<%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
+        </h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+   
+    <% if user_is_at_least_admin? %>
+      <div class="form-group">
+        <%= f.label :role %><br>
+        <%= f.select(:role, User.roles.keys.map {|role| [role.titleize, role]}) %>
+      </div>
+    <% end %>
+   
+    <%= f.submit %>
+  <% end %>
+  <br>
+  <%= link_to 'Back', @user %>
+</div>

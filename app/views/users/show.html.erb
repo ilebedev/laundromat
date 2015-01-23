@@ -1,2 +1,26 @@
-Oh hello! You've reached the show page for <%= @user.first_name %> the <%= @user.role.capitalize %>.
+<div class="container col-xs-12 text-left">		
+  <%= image_tag @user.image %>
+  <p>
+    <strong>Name:</strong>
+    <%= @user.first_name %>
+  </p>
 
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p> 
+  
+  <p>
+    <strong>Role:</strong>
+    <%= @user.role.capitalize %>
+  </p>
+
+  <% if user_is_at_least_admin? %>
+    <%= link_to 'Back', streams_path %> |
+  <% end %>
+  <%= link_to 'Edit', edit_user_path(@user) %>
+  <% if user_is_at_least_admin? %> | <%= link_to 'Delete', user_path(@user),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>
