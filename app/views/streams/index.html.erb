@@ -8,16 +8,20 @@
 	  </tr>
 	 
 	  <% @streams.each do |s| %>
-		<tr>
-		  <td><%= link_to s.title, s %></td>
-		  <td><%= s.category %></td>
-		  <td><%= s.description %></td>
-		  <td><%= link_to 'Edit', edit_stream_path(s) %></td>
-		  <td><%= link_to 'Delete', stream_path(s),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-		</tr>
+      <tr>
+        <td><%= link_to s.title, s %></td>
+        <td><%= s.category %></td>
+        <td><%= s.description %></td>
+        <% if user_is_at_least_admin? %>
+          <td><%= link_to 'Edit', edit_stream_path(s) %></td>
+          <td><%= link_to 'Delete', stream_path(s),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
 	  <% end %>
 	</table>
-	<%= link_to "Add a Stream", new_stream_path %>
+  <% if user_is_at_least_admin? %>
+    <%= link_to "Add a Stream", new_stream_path %>
+  <% end %>
 </div>

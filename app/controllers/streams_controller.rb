@@ -12,11 +12,19 @@ class StreamsController < ApplicationController
   end
 
   def new
-    @stream = Stream.new
+    if user_is_at_least_admin?
+      @stream = Stream.new
+    else
+      redirect_to streams_path
+    end    
   end
 
   def edit
-    @stream = Stream.find(params[:id])
+    if user_is_at_least_admin?
+      @stream = Stream.find(params[:id])
+    else
+      redirect_to streams_path
+    end
   end
 
   def create

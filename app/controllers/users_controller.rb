@@ -21,7 +21,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    if user_is_at_least_admin? and @user.update(admin_params)
+      redirect_to @user
+    elsif user_is_at_least_user? and @user.update(user_params)
       redirect_to @user
     else
       render 'edit'
@@ -30,6 +32,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    redirect_to users_path
   end
 
   private

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   def self.create_authorization_methods (role)
     class_eval %Q{
+      helper_method :user_is_at_least_#{role}?
       def user_is_at_least_#{role}?
         user_role = User::ROLES.index(:#{role})
         current_role = User.roles.keys.index(current_user.role)
