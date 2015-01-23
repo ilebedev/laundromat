@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :update_last_seen
+  
   # NOTE: take care to remember to require appropriate levels of authorization
   # in every controller
 
@@ -46,6 +48,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def update_last_seen
+      if current_user
+        current_user.update(last_seen: DateTime.current())
+      end
+    end
+  
     def authorize(roles)
       # prerequisite: the user must be signed in
       # check to make sure role is in the allowed list

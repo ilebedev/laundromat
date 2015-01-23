@@ -14,6 +14,11 @@
     <strong>Role:</strong>
     <%= @user.role.capitalize %>
   </p>
+  
+  <p>
+    <strong>Last Seen:</strong>
+    <%= @user.last_seen ? time_ago_in_words(@user.last_seen, include_seconds: true) + ' ago' : 'never' %>
+  </p>
 
   <% if user_is_at_least_admin? %>
     <%= link_to 'Back', streams_path %> |

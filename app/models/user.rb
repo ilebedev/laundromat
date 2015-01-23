@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   # string email
   # string provider (for oauth)
   # string uid (for oauth)
+  # datetime last_seen
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
