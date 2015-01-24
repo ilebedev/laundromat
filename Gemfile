@@ -50,11 +50,13 @@ gem 'devise', '~> 3.3.0'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 2.0.0'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
+gem 'omniauth-twitter', '~> 1.1.0'
+gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
+gem 'omniauth-github', '~> 1.1.2'
 
 # Hide passwords from terminal when using capistrano
 gem 'highline', '~> 1.6.21'
 
 # Use the byebug debugger
 gem 'byebug', group: [:development, :test]
-
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]

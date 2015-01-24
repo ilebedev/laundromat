@@ -1,31 +1,37 @@
 <div class="container col-xs-12 text-left">
-  <%= image_tag @user.image, class: "profile_picture img_large" %>
-  <p>
-    <strong>Name:</strong>
-    <%= @user.first_name %>
-  </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+  <h1 class="text-center"><%= @user.first_name %> the <%= @user.role.capitalize %></h1>
+  <hr>
 
-  <p>
-    <strong>Role:</strong>
-    <%= @user.role.capitalize %>
-  </p>
-  
-  <p>
-    <strong>Last Seen:</strong>
-    <%= @user.last_seen ? time_ago_in_words(@user.last_seen, include_seconds: true) + ' ago' : 'never' %>
-  </p>
-
-  <% if user_is_at_least_admin? %>
-    <%= link_to 'Back', streams_path %> |
-  <% end %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
-  <% if user_is_at_least_admin? %> | <%= link_to 'Delete', user_path(@user),
+  <duv class="row">
+    <div class="col-sm-6 text-center">
+      <p>
+        <%= image_tag @user.image, class: "profile_picture img_large" %>
+        <br>
+        <%= @user.email %>
+        <br>
+        <% if user_is_at_least_admin? %>
+          <%= link_to 'Back', streams_path %> |
+        <% end %>
+          <%= link_to 'Edit', edit_user_path(@user) %>
+          <% if user_is_at_least_admin? %> | <%= link_to 'Delete', user_path(@user),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %>
-  <% end %>
+        <% end %>
+      </p>
+    </div>
+    <hr class="visible-xs">
+    <div class="col-sm-6 text-center">
+      <h2>Welcome back!</h2>
+      <p>We last saw you
+        <%= @user.last_seen ? time_ago_in_words(@user.last_seen, include_seconds: true) + ' ago' : 'never' %>
+      </p>
+
+      <h2>Things you've watched:</h2>
+      <p>
+        Todo: activity
+      </p>
+      <h2>
+    </div>
+  </div>
 </div>

@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :omniauthable,
          :omniauth_providers => [ :facebook,
-                                  :google_oauth2 ]
+                                  :google_oauth2,
+                                  :twitter,
+                                  :reddit,
+                                  :github ]
 
   # Roles for authorization (defaults to lowest privilege)
   ROLES = [:guest, :user, :admin] # NOTE: order matters! Enum value grows left to right.

@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<% if user_signed_in? %>
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <% if user_signed_in? %>
@@ -22,10 +23,11 @@
         the laundromat
       </a>
     </div>
-    <% if user_signed_in? %>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
+        <% if user_is_at_least_user? %>
         <li><%= link_to 'Watch', streams_path %></li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown_toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <%= image_tag current_user.image, class: "profile_picture" %>
@@ -33,7 +35,9 @@
             <span class="caret">
           </a>
           <ul class="dropdown-menu" role="menu">
+            <% if user_is_at_least_user? %>
             <li><%= link_to "Profile", user_path(current_user) %></li>
+            <% end %>
             <% if user_is_at_least_admin? %>
               <li><%= link_to "All Users", users_path %></li>
             <% end %>
@@ -42,12 +46,11 @@
         </li>
       </ul>
     </div>
-    <% end %>
   </div>
 </nav>
+<% end %>
 
 <main class="container">
-
   <% if notice %>
   <div class="alert alert-info alert-dismissable" role="alert">
     <button type="button" class="close" data-dismiss="alert">
@@ -66,9 +69,9 @@
     </button>
     <%= alert %>
   </div>
-<% end %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 </main>
 
 </body>

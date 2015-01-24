@@ -236,6 +236,9 @@ Devise.setup do |config|
 
   config.omniauth :facebook, Rails.application.secrets.facebook_token, Rails.application.secrets.facebook_key
   config.omniauth :google_oauth2, Rails.application.secrets.google_token, Rails.application.secrets.google_key
+  config.omniauth :github, Rails.application.secrets.github_token, Rails.application.secrets.github_key
+  config.omniauth :twitter, Rails.application.secrets.twitter_token,  Rails.application.secrets.twitter_key
+  config.omniauth :reddit, Rails.application.secrets.reddit_token, Rails.application.secrets.reddit_key
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
