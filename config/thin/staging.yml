@@ -13,6 +13,6 @@ user: deploy
 group: deploy
 port: 3000
 servers: 2
-address: 127.0.0.1
+address: 0.0.0.0
 environment: production
 daemonize: true
