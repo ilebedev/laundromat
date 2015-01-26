@@ -1,58 +1,82 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :rvm1_ruby_version, '2.1.3'
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+set :application, 'laundromat'
+set :default_stage, 'staging'
+set :filter, roles: %w{app}
+set :user, "deploy" # for tmp and deploy folders. Must match deploy user.
+
+# Repository info
+set :repo_url, 'git@github.com:ilebedev/laundromat.git'
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
-
-# Default value for :scm is :git
-# set :scm, :git
-
-# Default value for :format is :pretty
-# set :format, :pretty
+# TODO: figure out how to fetch user name
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :tmp_dir, "/home/#{fetch(:user)}/tmp"
 
 # Default value for :log_level is :debug
 # set :log_level, :debug
 
-# Default value for :pty is false
-# set :pty, true
-
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/secrets.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# nginx configuration
+set :nginx_domains, "#{fetch(:domain)}"
+set :nginx_roles, :admin
+set :nginx_use_ssl, false
+#set :nginx_ssl_certificate, 'my-domain.crt'
+#set :nginx_ssl_certificate_path, "#{shared_path}/ssl/certs"
+#set :nginx_ssl_certificate_key, 'my-domain.key'
+#set :nginx_ssl_certificate_key_path, "#{shared_path}/ssl/private"
+set :app_server, true
+set :app_server_host, "127.0.0.1"
+set :app_server_port, [3000, 3001]
+
+# Thin configuration
+# ... is in /config/thin/#{stage}.yml
+set :bundle_bins, fetch(:bundle_bins, []).push('thin')
+
+namespace :setup do
+  desc "Update PGP key for RVM installation"
+  task :update_rvm_key do
+    on roles(:all) do
+      execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+    end
+  end
+
+  desc "Install all the infrastructure things"
+  task :install do
+    on roles(:admin) do
+      execute :sudo, "apt-get update"
+      execute :sudo, "apt-get -y install curl git-core libreadline6-dev zlib1g-dev,libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs nginx"
+    end
+  end
+end
+
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
+  # TODO: remember to bundle install production only gems (--without development test doc)
 
 end
+
+before "rvm1:install:rvm", "setup:update_rvm_key"
+after 'setup:install', 'rvm1:install:rvm'
+after 'setup:install', 'rvm1:install:ruby'
+
+before 'deploy:start', 'setup'
+after 'deploy:finished', 'nginx:site:add'
+after 'deploy:finished', 'nginx:site:enable'
+
+after 'deploy:finished', 'deploy:restart'
+
+before 'deploy:start', 'nginx:start'
+after 'deploy:stop', 'nginx:stop'
+before 'deploy:restart', 'nginx:restart'
+
