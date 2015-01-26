@@ -1,4 +1,6 @@
 
+set :domain, 'laundromat-staging.csail.mit.edu'
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
@@ -6,7 +8,6 @@
 # used to set extended properties on the server.
 
 server 'laundromat-staging.csail.mit.edu', user: 'deploy', roles: %w{app}
-server 'laundromat-staging.csail.mit.edu', user: 'deploy-admin', roles: %w{admin}
 
 # Custom SSH Options
 # ==================

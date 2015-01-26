@@ -54,7 +54,7 @@ group :development do
   gem 'rvm1-capistrano3', '~> 1.3.2'
   gem 'capistrano-secrets-yml', '~> 1.0.0'
   gem 'capistrano-thin', git: 'git@github.com:freego/capistrano-thin.git'
-  gem 'capistrano3-nginx', git: 'git@github.com:ilebedev/capistrano3-nginx.git', branch: 'multiple-ports'
+  gem 'capistrano3-nginx', '~> 2.0.4', git: 'git@github.com:ilebedev/capistrano3-nginx.git'
 
   # Authentication
   gem 'devise', '~> 3.3.0'
@@ -62,7 +62,7 @@ group :development do
   gem 'omniauth-facebook', '~> 2.0.0'
   gem 'omniauth-google-oauth2', '~> 0.2.5'
   gem 'omniauth-twitter', '~> 1.1.0'
-  gem 'omniauth-reddit', :git => 'git://github.com/jackdempsey/omniauth-reddit.git'
+  gem 'omniauth-reddit', git: 'git://github.com/jackdempsey/omniauth-reddit.git'
   gem 'omniauth-github', '~> 1.1.2'
 
   # Hide passwords from terminal when using capistrano

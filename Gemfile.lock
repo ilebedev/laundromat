@@ -15,8 +15,7 @@ GIT
 
 GIT
   remote: git@github.com:ilebedev/capistrano3-nginx.git
-  revision: 7d3877b700255a42ac1aeda2162bb8c41dd15916
-  branch: multiple-ports
+  revision: 951bba525dbee1a1b6fd7d2637c1abbddd18b8a1
   specs:
     capistrano3-nginx (2.0.4)
       capistrano (>= 3.0.0)
@@ -230,7 +229,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.2)
   capistrano-secrets-yml (~> 1.0.0)
   capistrano-thin!
-  capistrano3-nginx!
+  capistrano3-nginx (~> 2.0.4)!
   coffee-rails (~> 4.0.0)
   devise (~> 3.3.0)
   font-awesome-sass

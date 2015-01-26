@@ -5,7 +5,6 @@ set :rvm1_ruby_version, '2.1.3'
 
 set :application, 'laundromat'
 set :default_stage, 'staging'
-set :filter, roles: %w{app}
 set :user, "deploy" # for tmp and deploy folders. Must match deploy user.
 
 # Repository info
@@ -29,8 +28,10 @@ set :linked_files, %w{config/secrets.yml}
 # set :keep_releases, 5
 
 # nginx configuration
-set :nginx_domains, "#{fetch(:domain)}"
-set :nginx_roles, :admin
+set :stage_domain, ->{ fetch(:domain, 'laundromat.csail.mit.edu') }
+
+set :nginx_domains, "#{fetch(:stage_domain)}"
+set :nginx_roles, :app
 set :nginx_use_ssl, false
 #set :nginx_ssl_certificate, 'my-domain.crt'
 #set :nginx_ssl_certificate_path, "#{shared_path}/ssl/certs"
@@ -38,11 +39,10 @@ set :nginx_use_ssl, false
 #set :nginx_ssl_certificate_key_path, "#{shared_path}/ssl/private"
 set :app_server, true
 set :app_server_host, "127.0.0.1"
-set :app_server_port, [3000, 3001]
+set :app_server_port, 3000
 
 # Thin configuration
 # ... is in /config/thin/#{stage}.yml
-set :bundle_bins, fetch(:bundle_bins, []).push('thin')
 
 namespace :setup do
   desc "Update PGP key for RVM installation"
@@ -54,16 +54,15 @@ namespace :setup do
 
   desc "Install all the infrastructure things"
   task :install do
-    on roles(:admin) do
+    on roles(:all) do
       execute :sudo, "apt-get update"
-      execute :sudo, "apt-get -y install curl git-core libreadline6-dev zlib1g-dev,libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs nginx"
+      execute :sudo, "apt-get -y install curl git-core libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs nginx"
     end
   end
 end
 
 namespace :deploy do
   # TODO: remember to bundle install production only gems (--without development test doc)
-
 end
 
 before "rvm1:install:rvm", "setup:update_rvm_key"
@@ -71,8 +70,11 @@ after 'setup:install', 'rvm1:install:rvm'
 after 'setup:install', 'rvm1:install:ruby'
 
 before 'deploy:start', 'setup'
-after 'deploy:finished', 'nginx:site:add'
-after 'deploy:finished', 'nginx:site:enable'
+
+before 'nginx:start', 'nginx:site:add'
+before 'nginx:start', 'nginx:site:enable'
+before 'nginx:restart', 'nginx:site:add'
+before 'nginx:restart', 'nginx:site:enable'
 
 after 'deploy:finished', 'deploy:restart'
 
