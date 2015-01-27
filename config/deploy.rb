@@ -14,6 +14,8 @@ set :repo_url, 'git@github.com:ilebedev/laundromat.git'
 # TODO: figure out how to fetch user name
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :tmp_dir, "/home/#{fetch(:user)}/tmp"
+set :deploy_via, :remote_cache
+set :copy_compression, :bz2
 
 # Default value for :log_level is :debug
 # set :log_level, :debug

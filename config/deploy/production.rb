@@ -1,4 +1,5 @@
-
+set :stage, :production
+set :rails_env, :production
 set :domain, 'laundromat.csail.mit.edu'
 
 # Extended Server Syntax
