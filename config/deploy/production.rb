@@ -8,7 +8,6 @@ set :domain, 'laundromat.csail.mit.edu'
 # used to set extended properties on the server.
 
 server 'laundromat.csail.mit.edu', user: 'deploy', roles: %w{app}
-server 'laundromat.csail.mit.edu', user: 'deploy-admin', roles: %w{admin}, no_release: true
 
 # Custom SSH Options
 # ==================

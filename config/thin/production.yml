@@ -8,7 +8,7 @@ max_persistent_conns: 512
 threaded: true
 no-epoll: true
 tag: laundromat
-chdir: /home/deploy/apps/laundromat
+chdir: /home/deploy/apps/laundromat/current
 user: deploy
 group: deploy
 port: 3000
