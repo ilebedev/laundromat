@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
          :omniauth_providers => [ :facebook,
                                   :google_oauth2,
                                   :twitter,
-                                  :reddit,
                                   :github ]
 
   # Roles for authorization (defaults to lowest privilege)

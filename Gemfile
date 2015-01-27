@@ -43,7 +43,6 @@ gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-facebook', '~> 2.0.0'
 gem 'omniauth-google-oauth2', '~> 0.2.5'
 gem 'omniauth-twitter', '~> 1.1.0'
-gem 'omniauth-reddit', git: 'git://github.com/jackdempsey/omniauth-reddit.git'
 gem 'omniauth-github', '~> 1.1.2'
 
 # Hide passwords from terminal when using capistrano
