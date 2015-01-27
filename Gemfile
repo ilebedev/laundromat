@@ -37,6 +37,18 @@ gem 'jbuilder', '~> 2.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Authentication
+gem 'devise', '~> 3.3.0'
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-facebook', '~> 2.0.0'
+gem 'omniauth-google-oauth2', '~> 0.2.5'
+gem 'omniauth-twitter', '~> 1.1.0'
+gem 'omniauth-reddit', git: 'git://github.com/jackdempsey/omniauth-reddit.git'
+gem 'omniauth-github', '~> 1.1.2'
+
+# Hide passwords from terminal when using capistrano
+gem 'highline', '~> 1.6.21'
+
 # Non-production gems
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -48,25 +60,13 @@ group :development do
   gem 'spring'
 
   # Use Capistrano for deployment
-  gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-bundler', '~> 1.1.3'
-  gem 'capistrano-rails', '~> 1.1.2'
-  gem 'rvm1-capistrano3', '~> 1.3.2'
-  gem 'capistrano-secrets-yml', '~> 1.0.0'
-  gem 'capistrano-thin', git: 'git@github.com:freego/capistrano-thin.git'
-  gem 'capistrano3-nginx', '~> 2.0.4', git: 'git@github.com:ilebedev/capistrano3-nginx.git'
-
-  # Authentication
-  gem 'devise', '~> 3.3.0'
-  gem 'omniauth', '~> 1.2.2'
-  gem 'omniauth-facebook', '~> 2.0.0'
-  gem 'omniauth-google-oauth2', '~> 0.2.5'
-  gem 'omniauth-twitter', '~> 1.1.0'
-  gem 'omniauth-reddit', git: 'git://github.com/jackdempsey/omniauth-reddit.git'
-  gem 'omniauth-github', '~> 1.1.2'
-
-  # Hide passwords from terminal when using capistrano
-  gem 'highline', '~> 1.6.21'
+  gem 'capistrano', '~> 3.2.1', require: false
+  gem 'capistrano-bundler', '~> 1.1.3', require: false
+  gem 'capistrano-rails', '~> 1.1.2', require: false
+  gem 'rvm1-capistrano3', '~> 1.3.2', require: false
+  gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
+  gem 'capistrano-thin', git: 'git@github.com:freego/capistrano-thin.git', require: false
+  gem 'capistrano3-nginx', '~> 2.0.4', git: 'git@github.com:ilebedev/capistrano3-nginx.git', require: false
 end
 
 group :development, :test do
