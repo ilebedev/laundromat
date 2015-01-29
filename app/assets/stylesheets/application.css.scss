@@ -3,6 +3,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// Overriding styles
+.navbar-default {
+    background-color: #FFF;
+    border-style: none;
+}
+
 // Font awesome
 @import "font-awesome-sprockets";
 @import "font-awesome";

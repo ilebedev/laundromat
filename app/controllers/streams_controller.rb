@@ -1,7 +1,7 @@
 class StreamsController < ApplicationController
   # Users can list and view; Admin can do everything else
-  before_filter :authenticate_and_authorize_at_least_user, only: [:index, :show]
-  before_filter :authenticate_and_authorize_at_least_admin, except: [:index, :show]
+  before_filter :authenticate_and_authorize_at_least_user, only: [:show]
+  before_filter :authenticate_and_authorize_at_least_admin, except: [:show]
 
   def index
     @streams = Stream.all
@@ -12,19 +12,11 @@ class StreamsController < ApplicationController
   end
 
   def new
-    if user_is_at_least_admin?
-      @stream = Stream.new
-    else
-      redirect_to streams_path
-    end    
+    @stream = Stream.new
   end
 
   def edit
-    if user_is_at_least_admin?
-      @stream = Stream.find(params[:id])
-    else
-      redirect_to streams_path
-    end
+    @stream = Stream.find(params[:id])
   end
 
   def create

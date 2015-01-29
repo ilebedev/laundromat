@@ -11,18 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122114559) do
+ActiveRecord::Schema.define(version: 20150129042944) do
+
+  create_table "films", force: true do |t|
+    t.string   "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shows", force: true do |t|
+    t.string   "image_url"
+    t.string   "title"
+    t.string   "description"
+    t.string   "imdb_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "streams", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "imdbLink"
-    t.string   "wikipediaLink"
-    t.string   "rottenTomatoesLink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category"
+    t.string   "imdb_link"
+    t.datetime "date_produced"
+    t.string   "urls"
+    t.string   "media_type"
+    t.integer  "media_id"
   end
+
+  add_index "streams", ["media_id", "media_type"], name: "index_streams_on_media_id_and_media_type"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
