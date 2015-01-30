@@ -1,26 +1,46 @@
 <div class="container col-xs-12 text-center streams">
-	<h1>Users</h1>
-	<table class="table table-striped table-bordered text-left">
-	  <tr>
-		<th>Image</th>
-		<th>First Name</th>
-		<th>Email</th>
-    <th>Role</th>
-    <th>Last Seen</th>
-	  </tr>
-	 
-	  <% @users.each do |u| %>
-      <tr>
-        <td><%= image_tag u.image, class: "profile_picture" %></td>
-        <td><%= link_to u.first_name, u %></td>
-        <td><%= u.email %></td>
-        <td><%= u.role %>
-        <td><%= u.last_seen ? time_ago_in_words(u.last_seen, include_seconds: true) + ' ago' : 'never' %>
-        <td><%= link_to 'Edit', edit_user_path(u) %></td>
-        <td><%= link_to 'Delete', user_path(u),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-	  <% end %>
-	</table>
+  <h1>List of Users</h1>
+
+  <hr>
+
+  <h2>Admins</h2>
+  <table class="table table-striped  text-left">
+    <tr>
+      <th class="col-xs-5">Admin</th>
+      <th class="col-xs-4">Email</th>
+      <th class="col-xs-3">Last Seen</th>
+    </tr>
+
+    <% @users.select{ |u| u.role == 'admin' }.each do |u| %>
+      <%= render "user_table_entry", u: u %>
+    <% end %>
+  </table>
+
+  <hr>
+
+  <h2>Users</h2>
+  <table class="table table-striped text-left">
+    <tr>
+      <th class="col-xs-5">User</th>
+      <th class="col-xs-4">Email</th>
+      <th class="col-xs-3">Last Seen</th>
+    </tr>
+    <% @users.select{ |u| u.role == 'user' }.each do |u| %>
+      <%= render "user_table_entry", u: u %>
+    <% end %>
+  </table>
+
+  <hr>
+
+  <h2>Guests</h2>
+  <table class="table table-striped text-left">
+    <tr>
+      <th class="col-xs-5">Guest</th>
+      <th class="col-xs-4">Email</th>
+      <th class="col-xs-3">Last Seen</th>
+    </tr>
+    <% @users.select{ |u| u.role == 'guest' }.each do |u| %>
+      <%= render "user_table_entry", u: u %>
+    <% end %>
+  </table>
 </div>

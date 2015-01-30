@@ -1,0 +1,19 @@
+<tr>
+  <td>
+    <%= image_tag u.image, class: "profile_picture" %>
+    <%= link_to u.first_name, u %>
+    <span class="pull-right">
+      <%= link_to 'Edit', edit_user_path(u), class: 'label label-info' %>
+      <%= link_to 'Become', user_become_path(u), class: 'label label-warning',
+          method: :post,
+          data: { confirm: 'Are you sure you want to become ' +
+                            u.first_name + ' the ' + u.role + '?' } %>
+      <%= link_to 'Delete', user_path(u), class: 'label label-danger',
+          method: :delete,
+          data: { confirm: 'Are you sure you want to delete ' +
+                            u.first_name + ' the ' + u.role + '?' } %>
+    </span>
+  </td>
+  <td><%= u.email %></td>
+  <td><%= u.last_seen ? time_ago_in_words(u.last_seen, include_seconds: true) + ' ago' : 'never' %>
+</tr>

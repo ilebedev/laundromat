@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # NOTE: Guest can do anything (to self) except index, Admin can do everything
-  before_filter :authenticate_and_authorize_at_least_admin, only: [:index]
-  before_filter :authenticate_and_authorize_for_user, except: [:index]
+  before_filter :authenticate_and_authorize_at_least_admin, only: [:index, :become]
+  before_filter :authenticate_and_authorize_for_user, except: [:index, :become]
 
   def authenticate_and_authorize_for_user
     @user = User.find params[:id]
@@ -10,6 +10,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+  end
+
+  def become
+    user = User.find params[:user_id]
+    become_user(user)
   end
 
   def edit

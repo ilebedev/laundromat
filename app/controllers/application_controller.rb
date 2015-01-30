@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :update_last_seen
-  
+
   # NOTE: take care to remember to require appropriate levels of authorization
   # in every controller
 
@@ -53,7 +53,12 @@ class ApplicationController < ActionController::Base
         current_user.update(last_seen: DateTime.current())
       end
     end
-  
+
+    def become_user(user)
+      sign_in_and_redirect user
+      flash[:notice] = 'Became ' + user.first_name + ' the ' + user.role + '!'
+    end
+
     def authorize(roles)
       # prerequisite: the user must be signed in
       # check to make sure role is in the allowed list
