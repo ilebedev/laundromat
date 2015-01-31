@@ -8,6 +8,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       def #{provider}
         #need to implement this in my model
         @user = User.from_omniauth(request.env["omniauth.auth"])
+        check_invite(@user)
         handle_sign_in(@user, "#{provider}")
       end
     }
@@ -20,6 +21,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # development-only method for authentication via a link
   def development_auth
     @user = User.from_params(development_user_params)
+    check_invite(@user)
     handle_sign_in(@user, "development")
   end
 
@@ -38,6 +40,19 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session["devise.omniauth.data"] = request.env["omniauth.auth"]
         byebug
         redirect_to new_user_registration_url
+      end
+    end
+    
+  private
+    # if a user signs up with an invite token, they automatically have the user role
+    def check_invite(user)
+      if session[:token]
+        invite = Invite.find_by(token: session[:token])
+        if invite
+          user.update(role: :user)
+          session[:token] = nil
+          invite.delete
+        end
       end
     end
 end

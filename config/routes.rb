@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :streams
   resources :media
+  resources :invites
+  resources :requests
 
   resources :users do
     post 'become'

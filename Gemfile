@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-# Use thin webserver
-gem 'thin', '~> 1.6.3'
-
 # Rails!
 gem 'rails', '4.1.6'
 
@@ -57,7 +54,9 @@ end
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
 
+group :deployment do
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.2.1', require: false
   gem 'capistrano-bundler', '~> 1.1.3', require: false
@@ -77,4 +76,9 @@ group :development, :test do
     # Timezones fix for windows
     gem 'tzinfo-data'
   end
+end
+
+group :production do
+  # Use thin webserver
+  gem 'thin', '~> 1.6.3'
 end

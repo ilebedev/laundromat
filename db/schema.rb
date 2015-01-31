@@ -13,10 +13,30 @@
 
 ActiveRecord::Schema.define(version: 20150129042944) do
 
+  create_table "invites", force: true do |t|
+    t.string   "token",           null: false
+    t.integer  "user_id"
+    t.datetime "expiration_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id"
+
   create_table "media", force: true do |t|
     t.string   "image_url"
     t.string   "title"
     t.integer  "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "requests", force: true do |t|
+    t.string   "title"
+    t.string   "category"
+    t.text     "description"
+    t.string   "link"
+    t.integer  "votes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
