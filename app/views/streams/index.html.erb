@@ -1,5 +1,13 @@
 <div class="container col-xs-12 text-center streams">
   <h1>List of Streams</h1>
+
+  <%= link_to new_medium_path, class: "btn btn-default btn-success btn-lg" do %>
+    <%= icon 'plus-circle' %>
+    New Film/Show
+  <% end %>
+
+  <hr>
+
   <table class="table table-striped table-bordered text-left">
     <tr>
     <th>Title</th>

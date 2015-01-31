@@ -15,20 +15,25 @@
 
 .profile_picture {
   border-radius: 50%;
-  height: 2em;
-  width: 2em;
+  height: 1em;
+  width: 1em;
   overflow: hidden;
 }
 
 .img_large {
   height: 8em;
   width: 8em;
+  overflow: hidden;
 }
 
 .big_icon {
   font-size: 3em;
   display: inline-block;
   color: gray;
+}
+
+.btn-square {
+  border-radius: 0 !important;
 }
 
 .background {

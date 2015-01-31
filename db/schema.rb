@@ -13,17 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20150129042944) do
 
-  create_table "films", force: true do |t|
-    t.string   "image_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "shows", force: true do |t|
+  create_table "media", force: true do |t|
     t.string   "image_url"
     t.string   "title"
-    t.string   "description"
-    t.string   "imdb_link"
+    t.integer  "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150129042944) do
     t.integer  "media_id"
   end
 
-  add_index "streams", ["media_id", "media_type"], name: "index_streams_on_media_id_and_media_type"
+  add_index "streams", ["media_id"], name: "index_streams_on_media_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

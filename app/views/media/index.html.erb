@@ -1,1 +1,13 @@
-Media!
+<h1>Film and TV</h1>
+
+<div class="row">
+  <% @media.each do |m| %>
+    <%= render "media_tile", m: m %>
+  <% end %>
+
+  <hr>
+
+  <p>
+    Are your favorite things missing? Make a request!
+  </p>
+</div>

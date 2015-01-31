@@ -26,33 +26,58 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
         <% if user_is_at_least_user? %>
-        <li><%= link_to 'Watch', media_path %></li>
+        <li>
+          <%= link_to media_path, class: "btn-lg btn-square" do %>
+            <%= icon 'play-circle' %>
+            Watch
+          <% end %>
+        </li>
         <% end %>
         <% if user_is_at_least_admin? %>
         <li class="dropdown">
-          <a href="#" class="dropdown_toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <span class="label label-danger">
+          <a href="#" class="dropdown_toggle btn-lg btn-square" data-toggle="dropdown" role="button" aria-expanded="false">
+              <%= icon 'cog' %>
               Admin
               <span class="caret">
             </span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><%= link_to "List of users", users_path %></li>
-            <li><%= link_to "List of streams", streams_path %></li>
+            <li>
+              <%= link_to users_path do %>
+                <%= icon 'users' %>
+                List of users
+              <% end %>
+            </li>
+            <li>
+              <%= link_to streams_path do %>
+                <%= icon 'film' %>
+                List of streams
+              <% end %>
+            </li>
           </ul>
         </li>
         <% end %>
         <li class="dropdown">
-          <a href="#" class="dropdown_toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <a href="#" class="dropdown_toggle btn-lg btn-square" data-toggle="dropdown" role="button" aria-expanded="false">
             <%= image_tag current_user.image, class: "profile_picture" %>
             <%= current_user.first_name %>
             <span class="caret">
           </a>
           <ul class="dropdown-menu" role="menu">
             <% if user_is_at_least_user? %>
-            <li><%= link_to "Profile", user_path(current_user) %></li>
+            <li>
+              <%= link_to user_path(current_user) do %>
+                <%= icon 'user' %>
+                Profile
+              <% end %>
+            </li>
             <% end %>
-            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= icon 'sign-out' %>
+                Sign out
+              <% end %>
+            </li>
           </ul>
         </li>
       </ul>
