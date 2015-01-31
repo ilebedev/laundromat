@@ -9,6 +9,10 @@ class Stream < ActiveRecord::Base
   # t.references :media, polymorphic: true, index: true
   # t.timestamps
 
+  def self.orphans
+    []
+  end
+
   belongs_to :medium
 
   validates :title, presence: true

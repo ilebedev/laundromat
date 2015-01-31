@@ -5,29 +5,21 @@ class StreamsController < ApplicationController
 
   def index
     @streams = Stream.all
+    @media = Medium.all
+    @orphans = Stream.orphans
   end
 
   def show
     @stream = Stream.find(params[:id])
   end
 
-  def new
-    @stream = Stream.new
-  end
+  # def new does not exist
 
   def edit
     @stream = Stream.find(params[:id])
   end
 
-  def create
-    @stream = Stream.new(stream_params)
-
-    if @stream.save
-      redirect_to streams_path
-    else
-      render 'new'
-    end
-  end
+  # def create does not exist
 
   def update
     @stream = Stream.find(params[:id])

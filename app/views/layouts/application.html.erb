@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
         <% if user_is_at_least_user? %>
-        <li>
+        <li class=<%= 'active' if current_page?(media_path) %> >
           <%= link_to media_path, class: "btn-lg btn-square" do %>
             <%= icon 'play-circle' %>
             Watch

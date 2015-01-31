@@ -1,46 +1,58 @@
-<div class="container col-xs-12 text-center streams">
-  <h1>List of Users</h1>
+<h1>List of Users</h1>
 
-  <hr>
+<hr>
 
-  <h2>Admins</h2>
+<h2>Admins</h2>
+<% admins = @users.select{ |u| u.role == 'admin' } %>
+<% if admins.any? %>
   <table class="table table-striped  text-left">
     <tr>
       <th class="col-xs-5">Admin</th>
       <th class="col-xs-4">Email</th>
       <th class="col-xs-3">Last Seen</th>
     </tr>
-
-    <% @users.select{ |u| u.role == 'admin' }.each do |u| %>
+    <% admins.each do |u| %>
       <%= render "user_table_entry", u: u %>
     <% end %>
   </table>
+<% else %>
+  There aren't any admins. That's weird.
+<% end %>
 
-  <hr>
+<hr>
 
-  <h2>Users</h2>
-  <table class="table table-striped text-left">
+<h2>Users</h2>
+<% users = @users.select{ |u| u.role == 'user' } %>
+<% if users.any? %>
+  <table class="table table-striped  text-left">
     <tr>
       <th class="col-xs-5">User</th>
       <th class="col-xs-4">Email</th>
       <th class="col-xs-3">Last Seen</th>
     </tr>
-    <% @users.select{ |u| u.role == 'user' }.each do |u| %>
+    <% users.each do |u| %>
       <%= render "user_table_entry", u: u %>
     <% end %>
   </table>
+<% else %>
+  There aren't any users yet.
+<% end %>
 
-  <hr>
+<hr>
 
-  <h2>Guests</h2>
-  <table class="table table-striped text-left">
+<h2>Guests</h2>
+<% guests = @users.select{ |u| u.role == 'guest' } %>
+<% if guests.any? %>
+  <table class="table table-striped  text-left">
     <tr>
       <th class="col-xs-5">Guest</th>
       <th class="col-xs-4">Email</th>
       <th class="col-xs-3">Last Seen</th>
     </tr>
-    <% @users.select{ |u| u.role == 'guest' }.each do |u| %>
+    <% guests.each do |u| %>
       <%= render "user_table_entry", u: u %>
     <% end %>
   </table>
-</div>
+<% else %>
+  There aren't any guests at the moment.
+<% end %>

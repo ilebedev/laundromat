@@ -11,9 +11,7 @@ class MediaController < ApplicationController
     @medium = Medium.find(params[:id])
   end
 
-  def new
-    @medium = Medium.new
-  end
+  # def new does not exist
 
   def edit
     @medium = Medium.find(params[:id])
@@ -48,7 +46,7 @@ class MediaController < ApplicationController
 
   private
     def medium_params
-      params.require(:medium).permit(:image_url, :title, :type)
+      params.require(:medium).permit(:title, :type)
     end
 
 end
