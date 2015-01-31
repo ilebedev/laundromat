@@ -80,6 +80,12 @@
                 Profile
               <% end %>
             </li>
+            <li>
+              <%= link_to requests_path do %>
+                <%= icon 'user' %>
+                Requests
+              <% end %>
+            </li>
             <% end %>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
