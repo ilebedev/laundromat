@@ -24,7 +24,7 @@ set :copy_compression, :bz2
 set :linked_files, %w{config/secrets.yml db/production.sqlite3}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/linked_media}
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
