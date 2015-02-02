@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   end
 
   resources :streams, only: [:index, :edit, :update, :destroy]
-  resources :media, except: [:index, :show, :create, :destroy]
-  resources :requests, except: [:index, :create, :destroy]
+  resources :media, only: [:index, :show, :create, :destroy]
+  resources :requests, only: [:index, :create, :destroy]
   resources :invites, only: [:index, :create, :destroy]
 
   resources :users, except: [:new, :create] do
