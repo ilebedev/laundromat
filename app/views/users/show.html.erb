@@ -1,37 +1,36 @@
-<div class="container col-xs-12 text-left">
+<h1><%= @user.first_name %> the <%= @user.role.capitalize %></h1>
 
-  <h1 class="text-center"><%= @user.first_name %> the <%= @user.role.capitalize %></h1>
-  <hr>
+<hr>
 
-  <duv class="row">
-    <div class="col-sm-6 text-center">
-      <p>
-        <%= image_tag @user.image, class: "profile_picture img_large" %>
-        <br>
-        <%= @user.email %>
-        <br>
-        <% if user_is_at_least_admin? %>
-          <%= link_to 'Back', streams_path %> |
-        <% end %>
-          <%= link_to 'Edit', edit_user_path(@user) %>
-          <% if user_is_at_least_admin? %> | <%= link_to 'Delete', user_path(@user),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-        <% end %>
-      </p>
-    </div>
-    <hr class="visible-xs">
-    <div class="col-sm-6 text-center">
-      <h2>Welcome back!</h2>
-      <p>We last saw you
-        <%= @user.last_seen ? time_ago_in_words(@user.last_seen, include_seconds: true) + ' ago' : 'never' %>
-      </p>
+<div class="col-sm-6">
+  <p>
+    <%= image_tag @user.image, class: "profile_picture img_lg" %>
+    <br>
+    <%= @user.email %>
+    <br>
+    <% if user_is_at_least_admin? %>
+      <%= link_to 'Back', root_path %> |
+      <%= link_to 'Edit', edit_user_path(@user) %> |
+    <% end %>
 
-      <h2>Things you've watched:</h2>
-      <p>
-        Todo: activity
-      </p>
-      <h2>
-    </div>
-  </div>
+    <% if user_is_at_least_user? %>
+      <%= link_to 'Delete', user_path(@user),
+          method: :delete,
+          data: { confirm: 'Are you sure you want to permanently delete ' + @user.first_name + ' the ' + @user.role.capitalize + '?' } %>
+    <% end %>
+  </p>
+</div>
+
+<hr class="visible-xs">
+
+<div class="col-sm-6">
+  <h2>Welcome back!</h2>
+  <p>We last saw you
+    <%= @user.last_seen ? time_ago_in_words(@user.last_seen, include_seconds: true) + ' ago' : 'never' %>
+  </p>
+
+  <h2>Things you've watched:</h2>
+  <p>
+    Todo: activity
+  </p>
 </div>

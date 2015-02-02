@@ -1,0 +1,18 @@
+<h2>Create a new Film or Show</h2>
+<%= form_for Medium.new do |m| %>
+  <div class="col-sm-6">
+    <div class="input-group">
+      <%= m.label :title, class: "input-group-addon" %>
+      <%= m.text_field :title, class: 'form-control', placeholder: "4 the Fast and 4 The furious 4ever 4" %>
+    </div>
+  </div>
+  <br class="visible-xs">
+  <div class="col-sm-3 col-xs-6">
+    <%= m.label :category, class: "sr-only" %>
+    <% categories = Medium.categories.keys.map { |t| [t.titleize, t] } %>
+    <%= m.select :category, options_for_select(categories), {}, { class: 'form-control' } %>
+  </div>
+  <div class="col-sm-3 col-xs-6">
+    <%= m.submit "Create", class: "btn btn-default" %>
+  </div>
+<% end %>

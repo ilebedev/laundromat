@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     elsif user_is_at_least_user? and @user.update(user_params)
       redirect_to @user
     else
+      flash[:alert] << @user.errors.full_messages.to_sentence
       render 'edit'
     end
   end

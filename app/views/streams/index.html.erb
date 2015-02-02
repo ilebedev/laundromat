@@ -2,55 +2,83 @@
 
 <hr>
 
-<h2>Films</h2>
-<% films = @media.select{ |m| m.type = 'film' } %>
-<% if films.any? %>
-  <% films.each do |s| %>
-    Stream! <%= s.title %>
+<% if @media.any? %>
+  <table class="table table-striped">
+  <% @media.each do |m| %>
+    <tr>
+      <td><%= link_to m.title, medium_path(m) %></td>
+      <td>
+        <%= link_to '#', class: "btn btn-xs btn-warning" do %>
+          <%= icon 'refresh' %>
+          Scan for streams
+        <% end %>
+      </td>
+      <td class="text-right">
+        <%= link_to medium_path(m),
+          class: 'btn btn-xs btn-danger',
+          method: :delete,
+          data: { confirm: 'Are you sure you want to delete the ' + m.category  + ' ' + m.title.titleize + '?' } do %>
+          <%= icon 'trash' %>
+          delete <%= m.category %>
+        <% end %>
+      </td>
+    </tr>
+    <% streams = m.streams %>
+    <% if streams.any? %>
+      <% streams.each do |s| %>
+        <tr>
+          <td><%= link_to 'edit stream', edit_stream_path(s),
+                  class: 'btn btn-xs btn-default' %></td>
+          <td><%= s.title %></td>
+          <td class="text-right">
+            <%= link_to stream_path(s),
+                  class: 'btn btn-xs btn-danger',
+                  method: :delete,
+                  data: { confirm: 'Are you sure you want to delete the stream ' + s.title + '?' } do %>
+              <%= icon 'trash' %>
+              delete stream
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+      <td></td>
+      <td colspan="2">Hmmm. No streams belonging to <%= m.title %></td>
+      </tr>
+    <% end %>
   <% end %>
+  </table>
 <% else %>
-  There aren't any films yet.
-<% end %>
-
-<hr>
-
-<h2>Shows</h2>
-<% shows = @media.select{ |m| m.type = 'show' } %>
-<% if shows.any? %>
-  <% shows.each do |s| %>
-    Stream! <%= s.title %>
-  <% end %>
-<% else %>
-  There aren't any shows yet.
+  No media yet.
 <% end %>
 
 <hr>
 
 <h2>Orphaned Streams</h2>
 <% if @orphans.any? %>
-  <% @orphans.each do |s| %>
-    Stream! <%= s.title %>
-  <% end %>
+  <table class="table table-striped">
+    <% @orphans.each do |s| %>
+      <tr>
+        <td>
+          <%= s.title %>
+        </td>
+        <td class="text-right">
+          <%= link_to stream_path(s),
+                  class: 'btn btn-xs btn-danger',
+                  method: :delete,
+                  data: { confirm: 'Are you sure you want to delete the orphaned stream?' } do %>
+              <%= icon 'trash' %>
+              delete stream
+          <% end %>
+        </td>
+      <tr>
+    <% end %>
+  </table>
 <% else %>
   Oh good, there are no streams without associated media.
 <% end %>
 
 <hr>
 
-<h2>Create a new Film or Show</h2>
-<div class="row">
-  <%= form_for :medium do |m| %>
-    <div class="form-group col-sm-10 col-md-9">
-      <%= m.label :title %>
-      <%= m.text_field :title, class: 'form-control', placeholder: "Title" %>
-    </div>
-    <div class="form-group col-sm-2 col-md-3">
-      <%= m.label :type %><br>
-      <% types = Medium.types.keys.map { |t| [t.titleize, t] } %>
-      <%= m.select :type, options_for_select(types), {}, { class: 'form-control' } %>
-    </div>
-    <div class="form-group col-xs-6">
-      <%= m.submit "Create", class: "btn btn-success" %>
-    </div>
-  <% end %>
-</div>
+<%= render 'media/new_medium' %>

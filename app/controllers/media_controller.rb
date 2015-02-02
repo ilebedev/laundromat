@@ -5,15 +5,10 @@ class MediaController < ApplicationController
 
   def index
     @media = Medium.all
+    @request = Request.new
   end
 
   def show
-    @medium = Medium.find(params[:id])
-  end
-
-  # def new does not exist
-
-  def edit
     @medium = Medium.find(params[:id])
   end
 
@@ -23,17 +18,8 @@ class MediaController < ApplicationController
     if @medium.save
       redirect_to @medium
     else
-      render 'new'
-    end
-  end
-
-  def update
-    @medium = Medium.find(params[:id])
-
-    if @medium.update(medium_params)
-      redirect_to @medium
-    else
-      render 'edit'
+      flash[:alert] << @medium.errors.full_messages.to_sentence
+      redirect_to media_path
     end
   end
 
@@ -46,7 +32,6 @@ class MediaController < ApplicationController
 
   private
     def medium_params
-      params.require(:medium).permit(:title, :type)
+      params.require(:medium).permit(:title, :category)
     end
-
 end

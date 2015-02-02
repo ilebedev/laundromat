@@ -1,13 +1,45 @@
 <h1>Film and TV</h1>
 
-<div class="row">
-  <% @media.each do |m| %>
-    <%= render "media_tile", m: m %>
-  <% end %>
+<hr>
 
+<% if @media.any? %>
+  <div class="container">
+    <div class="row">
+      <% @media.each do |m| %>
+        <%= render "media_tile", m: m %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <p>
+    Hmm.. Nothing here yet..
+  </p>
+<% end %>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <p>
+      Are your favorite things missing? Make a request!
+    </p>
+  </div>
+  <div class="row">
+    <%= form_for @request do |r| %>
+      <div class="col-sm-6">
+        <%= r.label :request, class: "sr-only" %>
+        <%= r.text_field :request, class: "form-control", placeholder: "Your request. IMDB links are best!" %>
+      </div>
+      <br class="visible-xs">
+      <div class="col-sm-6">
+        <%= r.submit "Request!", class: "btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if user_is_at_least_admin? %>
   <hr>
 
-  <p>
-    Are your favorite things missing? Make a request!
-  </p>
-</div>
+  <%= render 'media/new_medium' %>
+<% end %>

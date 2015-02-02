@@ -13,10 +13,26 @@
 
 ActiveRecord::Schema.define(version: 20150129042944) do
 
+  create_table "invites", force: true do |t|
+    t.string   "token",      null: false
+    t.integer  "user_id"
+    t.string   "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id"
+
   create_table "media", force: true do |t|
     t.string   "image_url"
     t.string   "title"
-    t.integer  "type"
+    t.integer  "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "requests", force: true do |t|
+    t.string   "request"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,27 +40,28 @@ ActiveRecord::Schema.define(version: 20150129042944) do
   create_table "streams", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "imdb_link"
     t.datetime "date_produced"
-    t.string   "urls"
-    t.string   "media_type"
-    t.integer  "media_id"
+    t.string   "image_url"
+    t.string   "video_urls"
+    t.string   "subtitle_urls"
+    t.integer  "medium_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "streams", ["media_id"], name: "index_streams_on_media_id"
+  add_index "streams", ["medium_id"], name: "index_streams_on_medium_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "image"
     t.string   "email"
+    t.integer  "role"
+    t.datetime "last_seen"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
-    t.integer  "role"
-    t.datetime "last_seen"
   end
 
 end

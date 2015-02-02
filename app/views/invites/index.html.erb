@@ -1,0 +1,60 @@
+<h1>List of Invites</h1>
+
+<hr>
+
+<% if @invites.any? %>
+  <table class="table table-striped">
+    <% @invites.each do |i| %>
+      <% client = "client_" + i.token %>
+      <% id = "copy_"+ i.token %>
+      <% url = root_url + "?token=" + i.token %>
+      <tr>
+      <td>
+        <button id="<%= id %>"
+                class="btn btn-info btn-xs"
+                data-clipboard-text="<%= url %>">
+          copy invite
+          <span class="glyphicon glyphicon-copy"></span>
+        </button>
+        <script>
+          var <%= client %> = new ZeroClipboard( document.getElementById("<%= id %>"));
+          <%= client %>.on( "ready", function( readyEvent ) {
+            <%= client %>.on( "aftercopy", function ( event ) {
+              t = $(event.target);
+              t.addClass("btn-default");
+              t.removeClass("btn-info");
+            });
+          });
+        </script>
+        <%= i.memo %>
+      </td>
+      <td>
+        (by <%= link_to i.user.first_name, user_path(i.user) %>)
+      </td>
+      <td>
+        <%= link_to 'Delete', invite_path(i),
+          class: 'label label-danger',
+          method: :delete,
+          data: { confirm: 'Are you sure you want to delete the invite "' + i.memo + '"?'  } %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  There aren't any invites at the moment.
+<% end %>
+
+<hr>
+
+<%= form_for @new_invite do |i| %>
+  <div class="col-sm-6">
+    <div class="input-group">
+      <%= i.label :memo, class: "input-group-addon" %>
+      <%= i.text_field :memo, class: "form-control", value: Time.now.strftime("created at %I:%M:%S %p on %B %d") %>
+    </div>
+  </div>
+  <br class="visible-xs">
+  <div class="col-sm-6">
+    <%= i.submit "Generate", class: 'btn btn-default' %>
+  </div>
+<% end %>

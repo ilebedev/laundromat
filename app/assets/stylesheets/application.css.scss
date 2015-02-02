@@ -1,28 +1,50 @@
 
+// Fonts
+@import url(http://fonts.googleapis.com/css?family=Oswald:400);
+@import url(http://fonts.googleapis.com/css?family=Lato:400);
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// typography
+$font-size-base:        16px;
+$font-family-base:      "Lato", Times, serif;
+$headings-font-family:  "Oswald", Helvetica, Arial, sans-serif;
+
+// navbar
+$navbar-default-bg:     #fff;
+$navbar-border-radius:  0px;
+//$navbar-default-border: #fff;
+
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// Overriding styles
-.navbar-default {
-    background-color: #FFF;
-    border-style: none;
-}
+@import url("https://vjs.zencdn.net/4.11/video-js.css");
 
-// Font awesome
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
+// Local styles
 .profile_picture {
   border-radius: 50%;
-  height: 1em;
-  width: 1em;
+  height: 1.5em;
+  width: 1.5em;
   overflow: hidden;
 }
 
-.img_large {
+.img_lg {
   height: 8em;
   width: 8em;
+  overflow: hidden;
+}
+
+.poster_md {
+  height: 10em;
+  width: auto;
+  overflow: hidden;
+}
+
+.poster_sm {
+  height: 5em;
+  width: auto;
   overflow: hidden;
 }
 
@@ -37,8 +59,8 @@
   color: gray;
 }
 
-.btn-square {
-  border-radius: 0 !important;
+.media-tile a {
+  text-decoration: none !important;
 }
 
 .background {

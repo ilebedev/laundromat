@@ -1,38 +1,54 @@
-<div class="container col-xs-12 text-left">
-	<h1>Edit a User</h1>
-	<%= form_for @user do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
-        </h2>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+<h1>Edit <%= @user.first_name %> the <%= @user.role.capitalize %></h1>
 
-    <div class="form-group">
-      <%= f.label :first_name %><br>
-      <%= f.text_field :first_name %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :email %><br>
-      <%= f.text_field :email %>
-    </div>
-   
-    <% if user_is_at_least_admin? %>
-      <div class="form-group">
-        <%= f.label :role %><br>
-        <%= f.select(:role, User.roles.keys.map {|role| [role.titleize, role]}) %>
-      </div>
-    <% end %>
-   
-    <%= f.submit %>
-  <% end %>
-  <br>
-  <%= link_to 'Back', @user %>
+<hr>
+
+<div class="col-sm-6">
+  <p>
+    <%= image_tag @user.image, class: "profile_picture img_large" %>
+    <br>
+    <%= @user.email %>
+    <br>
+    <%= link_to 'Back', root_path %>
+  </p>
 </div>
+
+<hr class="visible-xs">
+
+<%= form_for @user, class: "form-group col-sm-6" do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> are holding things up:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group">
+    <%= f.label :first_name, class: "input-group-addon" %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <br>
+
+  <div class="input-group">
+    <%= f.label :email, class: "input-group-addon" %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+  <br>
+
+  <div class="input-group">
+    <%= f.label :role, class: "input-group-addon" %>
+    <% roles = User.roles.keys.map { |t| [t.titleize, t] } %>
+    <%= f.select :role, options_for_select(roles), {}, { class: 'form-control' } %>
+  </div>
+
+  <br>
+
+  <%= f.submit class: "btn btn-default" %>
+<% end %>

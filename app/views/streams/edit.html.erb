@@ -1,4 +1,24 @@
-<div class="container col-xs-12 text-left">
-	<h1>Edit a Stream</h1>
-	<%= render 'form' %>
-</div>
+<h1>Edit Stream : <%= @stream.title %></h1>
+
+<hr>
+
+<%= form_for @stream do |s| %>
+  <div class="form-group">
+    <p class="input-group">
+      <%= s.label :description, class: "input-group-addon" %>
+      <%= s.text_area :description, class: "form-control" %>
+    </p>
+    <p class="input-group">
+      <%= s.label :imdb_link, class: "input-group-addon" %>
+      <%= s.text_field :imdb_link, class: "form-control" %>
+    </p>
+    <p class="input-group">
+      <%= s.label :date_produced, class: "input-group-addon" %>
+      <%= s.date_field :date_produced, class: "form-control" %>
+    </p>
+    <p>
+      <%= link_to 'Back', streams_path, class: "btn btn-default" %>
+      <%= s.submit class: "btn btn-success" %>
+    </p>
+  </div>
+<% end %>
