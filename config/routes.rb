@@ -13,13 +13,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :streams, except: [:new, :create]
-  resources :media, except: [:new]
-  resources :requests
-
+  resources :streams, only: [:index, :edit, :update, :destroy]
+  resources :media, except: [:index, :show, :create, :destroy]
+  resources :requests, except: [:index, :create, :destroy]
   resources :invites, only: [:index, :create, :destroy]
 
-  resources :users do
+  resources :users, except: [:new, :create] do
     post 'become'
   end
 
