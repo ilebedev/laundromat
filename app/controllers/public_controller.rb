@@ -7,11 +7,13 @@ class PublicController < ApplicationController
       redirect_to media_path
     end
   end
-  
+
   private
     def check_token
+      @token = false
       if (params[:token] and Invite.exists?(token: params[:token]))
         session[:token] = params[:token]
+        @token = true
       end
     end
 end

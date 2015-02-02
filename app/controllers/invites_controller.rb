@@ -14,6 +14,7 @@ class InvitesController < ApplicationController
     if not @invite.save
       flash[:alert] << @medium.errors.full_messages.to_sentence
     end
+    redirect_to invites_path
   end
 
   def destroy

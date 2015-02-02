@@ -6,11 +6,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title">Ohi! Who're You?</h1>
+          <% if @token %>
+            <h1 class="modal-title">Ohi! You've Been Invited!</h1>
+          <% else %>
+            <h1 class="modal-title">Ohi! Who're You?</h1>
+          <% end %>
         </div>
         <div class="modal-body">
           <p>
-          Are you invited?
+          <% if @token %>
+            Welcome.
+          <% else %>
+            Have you been here before? You don't seem to have an invitation.
+          <% end %>
           Here, we don't use passwords.
           Instead, we use <a target="_blank" href="http://oauth.net/">fancypants technology</a> to securely check if you are are on our VIP list. Which identity provider will vouch for you?
           </p>
