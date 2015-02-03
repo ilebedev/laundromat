@@ -6,9 +6,6 @@ class ApplicationController < ActionController::Base
   # Record time of last interaction with each user
   before_filter :update_last_seen
 
-  # Initialize flash messages
-  prepend_before_filter :initialize_flash
-
   def self.create_authorization_methods (role)
     class_eval %Q{
       helper_method :user_is_at_least_#{role}?
@@ -35,13 +32,13 @@ class ApplicationController < ActionController::Base
 
   def authorize_for (user)
     unless authorized_for? user
-      flash[:alert] << 'Action available to a specific other user' +
-                       # (this leaks information) user.first_name +
-                       ' or an Admin, but you are ' +
-                       current_user.first_name +
-                       ' the ' +
-                       current_user.role +
-                       '.'
+      flash[:alert] = 'Action available to a specific other user' +
+                      # (this leaks information) user.first_name +
+                      ' or an Admin, but you are ' +
+                      current_user.first_name +
+                      ' the ' +
+                      current_user.role +
+                      '.'
       redirect_to root_url
       return false
     end
@@ -49,11 +46,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def initialize_flash
-      flash[:notice] ||= [];
-      flash[:alert] ||= [];
-    end
-
     def update_last_seen
       if current_user
         current_user.update(last_seen: DateTime.current())
@@ -62,14 +54,14 @@ class ApplicationController < ActionController::Base
 
     def become_user(user)
       sign_in_and_redirect user
-      flash[:notice] << 'Became ' + user.first_name + ' the ' + user.role + '!'
+      flash[:notice] = 'Became ' + user.first_name + ' the ' + user.role + '!'
     end
 
     def authorize(roles)
       # prerequisite: the user must be signed in
       # check to make sure role is in the allowed list
       if not roles.map{ |i| i.to_s }.include? current_user.role
-        flash[:alert] << 'Action available to ' +
+        flash[:alert] = 'Action available to ' +
                          roles.to_sentence +
                          ' roles, but you are merely a ' +
                          current_user.role +

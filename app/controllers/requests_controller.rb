@@ -10,9 +10,9 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     if @request.save
-      flash[:notice] << "Cool, thanks for placing a request. We'll get right on it"
+      flash[:notice] = "Cool, thanks for placing a request. We'll get right on it"
     else
-      flash[:alert] << @request.errors.full_messages.to_sentence
+      flash[:alert] = "Oh no! " + @request.errors.full_messages.to_sentence
     end
     redirect_to media_path
   end

@@ -18,7 +18,7 @@ class StreamsController < ApplicationController
     if @stream.update(stream_params)
       redirect_to streams_path
     else
-      flash[:alert] << @stream.errors.full_messages.to_sentence
+      flash[:alert] = @stream.errors.full_messages.to_sentence
 
       render 'edit'
     end

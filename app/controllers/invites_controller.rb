@@ -12,7 +12,7 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new( invite_params.merge({user: current_user}) )
     if not @invite.save
-      flash[:alert] << @medium.errors.full_messages.to_sentence
+      flash[:alert] = @medium.errors.full_messages.to_sentence
     end
     redirect_to invites_path
   end

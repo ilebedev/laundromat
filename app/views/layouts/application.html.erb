@@ -103,31 +103,27 @@
 <% end %>
 
 <main class="container">
- <% if [*notice].any? %>
-  <% [*notice].each do |m| %>
+ <% if notice %>
     <div class="alert alert-info alert-dismissable" role="alert">
        <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
-      <%= m %>
+      <%= notice%>
     </div>
   <% end %>
-<% end %>
 
-<% if [*alert].any? %>
-  <% [*alert].each do |m| %>
+  <% if alert %>
     <div class="alert alert-danger alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
-      <%= m %>
+      <%= alert %>
     </div>
   <% end %>
-<% end %>
 
-<%= yield %>
+  <%= yield %>
 </main>
 
 </body>

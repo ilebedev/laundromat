@@ -18,7 +18,7 @@ class MediaController < ApplicationController
     if @medium.save
       redirect_to @medium
     else
-      flash[:alert] << @medium.errors.full_messages.to_sentence
+      flash[:alert] = @medium.errors.full_messages.to_sentence
       redirect_to media_path
     end
   end
