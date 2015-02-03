@@ -22,6 +22,9 @@ gem 'sprockets-rails', '~> 2.2.2'
 # Font awesome
 gem 'font-awesome-sass'
 
+# ZeroClipboard for copy buttons
+gem 'zeroclipboard-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
