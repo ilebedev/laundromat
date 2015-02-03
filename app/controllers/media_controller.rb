@@ -10,16 +10,18 @@ class MediaController < ApplicationController
 
   def show
     @medium = Medium.find(params[:id])
+    @stream = @medium.streams.first
+    @stream ||= Stream.new
   end
 
   def create
     @medium = Medium.new(medium_params)
 
-    if @medium.save
+    if (@medium.save rescue false)
       redirect_to @medium
     else
       flash[:alert] = @medium.errors.full_messages.to_sentence
-      redirect_to media_path
+      redirect_to URI(request.referer).path
     end
   end
 

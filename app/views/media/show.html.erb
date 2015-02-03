@@ -9,8 +9,10 @@
   <%= @medium.category.titleize %>, 2004, October 1
 
   <span ng-repeat="tag in tags">
-    <%= link_to 'http://www.imdb.com/title/tt0375912', class: "btn btn-default btn-xs" do %>
-      <%= icon 'star-o' %> IMDB
+    <% if @stream.imdb_link %>
+      <%= link_to @stream.imdb_link, class: "btn btn-default btn-xs" do %>
+        <%= icon 'star-o' %> IMDB
+     <% end %>
     <% end %>
   </span>
 </div>
@@ -19,35 +21,36 @@
 
 <div class="row">
 <div class="col-sm-6">
-  <% @medium.streams.each do |s| %>
-    <div class="embed-responsive embed-responsive-16by9">
-      <video id="<%= s.id %>"
-             class="video-js embed-responsive-item"
-             controls preload="auto"
-             width="100%" height="auto"
-             poster="/<%= @medium.image_url %>"
-             >
-        <%= [*(JSON.parse s.video_urls)].each do |video_url| %>
-          <source src="/<%= video_url %>" type='video/mp4' >
-        <% end %>
+  <div class="embed-responsive embed-responsive-16by9">
+    <video id="<%= @stream.id %>"
+           class="video-js embed-responsive-item"
+           controls preload="auto"
+           width="100%" height="auto"
+           poster="/<%= @stream.image_url %>"
+           >
+      <%= [*(JSON.parse @stream.video_urls)].each do |video_url| %>
+        <source src="/<%= video_url %>" type='video/mp4' >
+      <% end %>
 
-        <%= [*(JSON.parse s.subtitle_urls)].each do |subtitle_url| %>
-          <% sub_label = File.basename subtitle_url, '.srt' %>
-          <track kind="subtitles" src="/<%= subtitle_url %>" label="<%= sub_label %>">
-        <% end %>
+      <%= [*(JSON.parse @stream.subtitle_urls)].each do |subtitle_url| %>
+        <% sub_label = File.basename subtitle_url, '.srt' %>
+        <track kind="subtitles" src="/<%= subtitle_url %>" label="<%= sub_label %>">
+      <% end %>
 
-        <p class="vjs-no-js">
-          Your browser does not seem to like us. We require javascript and <a href="http://videojs.com/html5-video-support" target="_blank">HTML5 video</a>
-        </p>
-      </video>
-    </div>
-    <br>
-  <% end %>
+      <p class="vjs-no-js">
+        Your browser does not seem to like us. We require javascript and <a href="http://videojs.com/html5-video-support" target="_blank">HTML5 video</a>
+      </p>
+    </video>
+  </div>
 </div>
 
 <div class="col-sm-6">
   <p>
-    A successful cocaine dealer gets two tough assignments from his boss on the eve of his planned early retirement.
+    <% if @stream.description %>
+      <%= @stream.description %>
+    <% else %>
+      There are no words to describe this...
+    <% end %>
   </p>
   <p ng-repeat="tag in tags">
     <span class="label label-default">EN</span>
