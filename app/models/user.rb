@@ -18,18 +18,22 @@ class User < ActiveRecord::Base
   # Roles for authorization (defaults to lowest privilege)
   ROLES = [:guest, :user, :admin] # NOTE: order matters! Enum value grows left to right.
   enum role: ROLES
-  
+
   has_many :invites
 
-  before_create :set_default_role
+  before_create :set_defaults
 
-  def set_default_role
+  def set_defaults
     # Make the first user admin, otherwise default to guest
     if User.unscoped.count == 0
       self.role ||= :admin
     else
       self.role ||= :guest
     end
+
+    self.first_name ||= "Anonymous"
+    self.image ||= "anonymous_avatar.jpg"
+    self.email ||= "none@nowhere.io"
   end
 
   def self.from_omniauth(auth)

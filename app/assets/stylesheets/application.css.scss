@@ -28,6 +28,8 @@ $navbar-border-radius:  0px;
   height: 1.5em;
   width: 1.5em;
   overflow: hidden;
+  object-fit: cover; // do not scale
+  object-position: center;
 }
 
 .img_lg {
