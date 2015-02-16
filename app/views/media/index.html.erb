@@ -2,11 +2,18 @@
 
 <hr>
 
+<div class="jumbotron">
+  <h1><span class="label label-danger">❥</span> Happy Valentine's Day!</h1>
+  <p>Oh, and we've also fixed tv shows, and formatting issues on smaller screens. You're welcome.</p>
+  </p>
+</div>
+
 <% if @media.any? %>
   <div class="container">
     <div class="row">
       <% @media.each do |m| %>
         <%= render "media_tile", m: m %>
+        <div class="clearfix visible-xs-block"></div>
       <% end %>
     </div>
   </div>

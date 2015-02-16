@@ -58,7 +58,10 @@ namespace :setup do
   task :install do
     on roles(:all) do
       execute :sudo, "apt-get update"
-      execute :sudo, "apt-get -y install curl git-core libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs nginx"
+      execute :sudo, "apt-get -y install curl git-core libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs nginx gpac mediainfo x264"
+      # gpac provides MP4Box
+      # mediainfo provides video file introspection
+      # x264 provides the encoder
     end
   end
 end

@@ -10,8 +10,16 @@ class MediaController < ApplicationController
 
   def show
     @medium = Medium.find(params[:id])
-    @stream = @medium.streams.first
-    @stream ||= Stream.new
+    @streams = @medium.streams.all
+    if params.has_key?(:stream)
+      @stream = @streams.find_by_id(params[:stream])
+    else
+      @stream = @streams.first
+    end
+
+    if @stream == nil
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   def create
