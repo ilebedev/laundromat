@@ -6,7 +6,11 @@
   <% @requests.each do |r| %>
     <tr>
       <td>
-        <%= r.request %>
+        <% if uri?(r.request) %>
+          <a href="<%= r.request %>"><%= r.request %></a>
+        <% else %>
+          <%= r.request %>
+        <% end %>
       </td>
       <td class="text-right">
         <%= link_to 'Delete', request_path(r),
