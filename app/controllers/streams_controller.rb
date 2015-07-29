@@ -1,6 +1,7 @@
 class StreamsController < ApplicationController
   # Users can list and view; Admin can do everything else
-  before_filter :authenticate_and_authorize_at_least_admin
+  before_filter :authenticate_and_authorize_at_least_curator, only: [ :index, :edit, :update ]
+  before_filter :authenticate_and_authorize_at_least_admin, except: [ :index, :edit, :update ]
 
   def index
     @media = Medium.all

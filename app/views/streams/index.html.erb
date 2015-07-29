@@ -14,12 +14,14 @@
         <% end %>
       </td>
       <td class="text-right">
-        <%= link_to medium_path(m),
-          class: 'btn btn-xs btn-danger',
-          method: :delete,
-          data: { confirm: 'Are you sure you want to delete the ' + m.category  + ' ' + m.title.titleize + '?' } do %>
-          <%= icon 'trash' %>
-          delete <%= m.category %>
+        <% if user_is_at_least_admin? %>
+          <%= link_to medium_path(m),
+            class: 'btn btn-xs btn-danger',
+            method: :delete,
+            data: { confirm: 'Are you sure you want to delete the ' + m.category  + ' ' + m.title.titleize + '?' } do %>
+            <%= icon 'trash' %>
+            delete <%= m.category %>
+          <% end %>
         <% end %>
       </td>
     </tr>
@@ -31,12 +33,14 @@
                   class: 'btn btn-xs btn-default' %></td>
           <td><%= s.title %></td>
           <td class="text-right">
-            <%= link_to stream_path(s),
-                  class: 'btn btn-xs btn-danger',
-                  method: :delete,
-                  data: { confirm: 'Are you sure you want to delete the stream ' + s.title + '?' } do %>
-              <%= icon 'trash' %>
-              delete stream
+            <% if user_is_at_least_admin? %>
+              <%= link_to stream_path(s),
+                    class: 'btn btn-xs btn-danger',
+                    method: :delete,
+                    data: { confirm: 'Are you sure you want to delete the stream ' + s.title + '?' } do %>
+                <%= icon 'trash' %>
+                delete stream
+              <% end %>
             <% end %>
           </td>
         </tr>

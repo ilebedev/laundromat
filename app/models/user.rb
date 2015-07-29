@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
                                   :github ]
 
   # Roles for authorization (defaults to lowest privilege)
-  ROLES = [:guest, :user, :admin] # NOTE: order matters! Enum value grows left to right.
+  ROLES = [:guest, :user, :curator, :admin] # NOTE: order matters! Enum value grows left to right.
   enum role: ROLES
 
   has_many :invites

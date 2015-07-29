@@ -1,7 +1,8 @@
 class RequestsController < ApplicationController
   # Users can list and view; Admin can do everything else
   before_filter :authenticate_and_authorize_at_least_user, only: [ :create ]
-  before_filter :authenticate_and_authorize_at_least_admin, except: [ :create ]
+  before_filter :authenticate_and_authorize_at_least_curator, only: [ :index ]
+  before_filter :authenticate_and_authorize_at_least_admin, except: [ :create, :index ]
 
   def index
     @requests = Request.all

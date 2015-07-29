@@ -56,9 +56,11 @@
     <span class="label label-default">EN</span>
   </p>
 
-  <h3>Episodes:</h3>
-  <% @streams.each do |s| %>
-    <%= link_to s.title, medium_path(@medium, stream: s.id) %><br>
+  <% if (@streams.size > 1) %>
+    <h3>Episodes:</h3>
+    <% @streams.each do |s| %>
+      <%= link_to s.title, medium_path(@medium, stream: s.id) %><br>
+    <% end %>
   <% end %>
 </div>
 </div>

@@ -21,6 +21,25 @@
 
 <hr>
 
+<h2>Curators</h2>
+<% curators = @users.select{ |u| u.role == 'curator' } %>
+<% if curators.any? %>
+  <table class="table table-striped  text-left">
+    <tr>
+      <th class="col-xs-5">Curator</th>
+      <th class="col-xs-4">Email</th>
+      <th class="col-xs-3">Last Seen</th>
+    </tr>
+    <% curators.each do |u| %>
+      <%= render "user_table_entry", u: u %>
+    <% end %>
+  </table>
+<% else %>
+  There aren't any curators at this point.
+<% end %>
+
+<hr>
+
 <h2>Users</h2>
 <% users = @users.select{ |u| u.role == 'user' } %>
 <% if users.any? %>
