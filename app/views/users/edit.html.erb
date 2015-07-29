@@ -45,7 +45,7 @@
   <div class="input-group">
     <%= f.label :role, class: "input-group-addon" %>
     <% roles = User.roles.keys.map { |t| [t.titleize, t] } %>
-    <%= f.select :role, options_for_select(roles), {}, { class: 'form-control' } %>
+    <%= f.select :role, options_for_select(roles, selected=@user.role), {}, { class: 'form-control' } %>
   </div>
 
   <br>
