@@ -6,7 +6,7 @@
   <p>
     <%= image_tag @user.image, class: "profile_picture img_large" %>
     <br>
-    <%= @user.email %>, provided by <% @user.provider %>.
+    <%= @user.email %>, provided by <%= @user.provider %>.
     <br>
     <%= link_to 'Back', root_path %>
   </p>
